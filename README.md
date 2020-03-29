@@ -1,4 +1,6 @@
 # BetterRCON
-Shitty RCON WinForms app that I created
+#Welcome to BetterRCON!
 
-I think this is already simple enough. Download the files on the Releases tab and enter your RCON details.
+[Downloads](https://github.com/memetrollsXD/BetterRCON/releases)
+
+[Wiki](https://github.com/memetrollsXD/BetterRCON/wiki/Setting-up-BetterRCON)
