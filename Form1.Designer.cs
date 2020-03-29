@@ -30,7 +30,7 @@
         {
             this.Tabs = new System.Windows.Forms.TabControl();
             this.RCON = new System.Windows.Forms.TabPage();
-            this.Output = new System.Windows.Forms.TextBox();
+            this.Output = new BetterRCON.AnsiTextBox();
             this.SendBTN = new System.Windows.Forms.Button();
             this.CMDInput = new System.Windows.Forms.TextBox();
             this.Settings = new System.Windows.Forms.TabPage();
@@ -58,10 +58,9 @@
             this.Tabs.Controls.Add(this.RCON);
             this.Tabs.Controls.Add(this.Settings);
             this.Tabs.Location = new System.Drawing.Point(1, 0);
-            this.Tabs.Margin = new System.Windows.Forms.Padding(4);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(1151, 530);
+            this.Tabs.Size = new System.Drawing.Size(863, 431);
             this.Tabs.TabIndex = 3;
             // 
             // RCON
@@ -69,39 +68,36 @@
             this.RCON.Controls.Add(this.Output);
             this.RCON.Controls.Add(this.SendBTN);
             this.RCON.Controls.Add(this.CMDInput);
-            this.RCON.Location = new System.Drawing.Point(4, 25);
-            this.RCON.Margin = new System.Windows.Forms.Padding(4);
+            this.RCON.Location = new System.Drawing.Point(4, 22);
             this.RCON.Name = "RCON";
-            this.RCON.Padding = new System.Windows.Forms.Padding(4);
-            this.RCON.Size = new System.Drawing.Size(1143, 501);
+            this.RCON.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.RCON.Size = new System.Drawing.Size(855, 405);
             this.RCON.TabIndex = 0;
             this.RCON.Text = "RCON";
             this.RCON.UseVisualStyleBackColor = true;
             // 
             // Output
             // 
-            this.Output.AcceptsReturn = true;
             this.Output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Output.Location = new System.Drawing.Point(12, 9);
-            this.Output.Margin = new System.Windows.Forms.Padding(4);
-            this.Output.Multiline = true;
+            this.Output.BackColor = System.Drawing.Color.Black;
+            this.Output.ForeColor = System.Drawing.Color.White;
+            this.Output.Location = new System.Drawing.Point(9, 7);
             this.Output.Name = "Output";
             this.Output.ReadOnly = true;
-            this.Output.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.Output.Size = new System.Drawing.Size(1115, 447);
+            this.Output.Size = new System.Drawing.Size(837, 364);
             this.Output.TabIndex = 5;
+            this.Output.Text = "";
             // 
             // SendBTN
             // 
             this.SendBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SendBTN.Location = new System.Drawing.Point(1028, 460);
-            this.SendBTN.Margin = new System.Windows.Forms.Padding(4);
+            this.SendBTN.Location = new System.Drawing.Point(771, 374);
             this.SendBTN.Name = "SendBTN";
-            this.SendBTN.Size = new System.Drawing.Size(100, 28);
+            this.SendBTN.Size = new System.Drawing.Size(75, 23);
             this.SendBTN.TabIndex = 4;
             this.SendBTN.Text = "Send";
             this.SendBTN.UseVisualStyleBackColor = true;
@@ -112,10 +108,9 @@
             this.CMDInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CMDInput.Location = new System.Drawing.Point(12, 464);
-            this.CMDInput.Margin = new System.Windows.Forms.Padding(4);
+            this.CMDInput.Location = new System.Drawing.Point(9, 377);
             this.CMDInput.Name = "CMDInput";
-            this.CMDInput.Size = new System.Drawing.Size(1007, 22);
+            this.CMDInput.Size = new System.Drawing.Size(756, 20);
             this.CMDInput.TabIndex = 3;
             // 
             // Settings
@@ -130,19 +125,19 @@
             this.Settings.Controls.Add(this.IPTextBox);
             this.Settings.Controls.Add(this.label3);
             this.Settings.Controls.Add(this.label1);
-            this.Settings.Location = new System.Drawing.Point(4, 25);
-            this.Settings.Margin = new System.Windows.Forms.Padding(4);
+            this.Settings.Location = new System.Drawing.Point(4, 22);
             this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(1143, 501);
+            this.Settings.Size = new System.Drawing.Size(855, 405);
             this.Settings.TabIndex = 2;
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
             // 
             // ResetBtn
             // 
-            this.ResetBtn.Location = new System.Drawing.Point(347, 273);
+            this.ResetBtn.Location = new System.Drawing.Point(260, 222);
+            this.ResetBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ResetBtn.Name = "ResetBtn";
-            this.ResetBtn.Size = new System.Drawing.Size(95, 47);
+            this.ResetBtn.Size = new System.Drawing.Size(71, 38);
             this.ResetBtn.TabIndex = 12;
             this.ResetBtn.Text = "Reset";
             this.ResetBtn.UseVisualStyleBackColor = true;
@@ -150,9 +145,10 @@
             // 
             // ConnectBtn
             // 
-            this.ConnectBtn.Location = new System.Drawing.Point(651, 273);
+            this.ConnectBtn.Location = new System.Drawing.Point(488, 222);
+            this.ConnectBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ConnectBtn.Name = "ConnectBtn";
-            this.ConnectBtn.Size = new System.Drawing.Size(102, 47);
+            this.ConnectBtn.Size = new System.Drawing.Size(76, 38);
             this.ConnectBtn.TabIndex = 13;
             this.ConnectBtn.Text = "Connect";
             this.ConnectBtn.UseVisualStyleBackColor = true;
@@ -160,9 +156,10 @@
             // 
             // LoadBtn
             // 
-            this.LoadBtn.Location = new System.Drawing.Point(501, 327);
+            this.LoadBtn.Location = new System.Drawing.Point(376, 266);
+            this.LoadBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoadBtn.Name = "LoadBtn";
-            this.LoadBtn.Size = new System.Drawing.Size(103, 47);
+            this.LoadBtn.Size = new System.Drawing.Size(77, 38);
             this.LoadBtn.TabIndex = 7;
             this.LoadBtn.Text = "Load";
             this.LoadBtn.UseVisualStyleBackColor = true;
@@ -173,10 +170,9 @@
             this.PortTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PortTextBox.Location = new System.Drawing.Point(501, 241);
-            this.PortTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.PortTextBox.Location = new System.Drawing.Point(376, 196);
             this.PortTextBox.Name = "PortTextBox";
-            this.PortTextBox.Size = new System.Drawing.Size(103, 22);
+            this.PortTextBox.Size = new System.Drawing.Size(78, 20);
             this.PortTextBox.TabIndex = 4;
             this.PortTextBox.TextChanged += new System.EventHandler(this.PortTextBox_TextChanged);
             // 
@@ -186,10 +182,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label2.Location = new System.Drawing.Point(468, 190);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(351, 154);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(172, 48);
+            this.label2.Size = new System.Drawing.Size(129, 39);
             this.label2.TabIndex = 7;
             this.label2.Text = "Port";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -199,10 +194,9 @@
             this.SaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveBtn.Location = new System.Drawing.Point(501, 273);
-            this.SaveBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.SaveBtn.Location = new System.Drawing.Point(376, 222);
             this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(104, 47);
+            this.SaveBtn.Size = new System.Drawing.Size(78, 38);
             this.SaveBtn.TabIndex = 6;
             this.SaveBtn.Text = "Save";
             this.SaveBtn.UseVisualStyleBackColor = true;
@@ -213,11 +207,10 @@
             this.PasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PasswordTextBox.Location = new System.Drawing.Point(619, 241);
-            this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.PasswordTextBox.Location = new System.Drawing.Point(464, 196);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = '*';
-            this.PasswordTextBox.Size = new System.Drawing.Size(171, 22);
+            this.PasswordTextBox.Size = new System.Drawing.Size(129, 20);
             this.PasswordTextBox.TabIndex = 5;
             // 
             // IPTextBox
@@ -225,10 +218,9 @@
             this.IPTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.IPTextBox.Location = new System.Drawing.Point(304, 241);
-            this.IPTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.IPTextBox.Location = new System.Drawing.Point(228, 196);
             this.IPTextBox.Name = "IPTextBox";
-            this.IPTextBox.Size = new System.Drawing.Size(188, 22);
+            this.IPTextBox.Size = new System.Drawing.Size(142, 20);
             this.IPTextBox.TabIndex = 3;
             // 
             // label3
@@ -237,10 +229,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label3.Location = new System.Drawing.Point(615, 190);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(461, 154);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(197, 48);
+            this.label3.Size = new System.Drawing.Size(148, 39);
             this.label3.TabIndex = 2;
             this.label3.Text = "Password";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -251,10 +242,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.Location = new System.Drawing.Point(343, 204);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(257, 166);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 33);
+            this.label1.Size = new System.Drawing.Size(88, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "IP";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -265,11 +255,11 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1148, 528);
+            this.ClientSize = new System.Drawing.Size(861, 429);
             this.Controls.Add(this.Tabs);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "BetterRCON";
             this.Tabs.ResumeLayout(false);
@@ -285,7 +275,7 @@
 
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.TabPage RCON;
-        private System.Windows.Forms.TextBox Output;
+        private AnsiTextBox Output;
         private System.Windows.Forms.Button SendBTN;
         private System.Windows.Forms.TextBox CMDInput;
         private System.Windows.Forms.TabPage Settings;
