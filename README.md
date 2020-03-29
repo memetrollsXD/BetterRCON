@@ -1,5 +1,5 @@
 # BetterRCON
-#Welcome to BetterRCON!
+Welcome to BetterRCON!
 
 [Downloads](https://github.com/memetrollsXD/BetterRCON/releases)
 
