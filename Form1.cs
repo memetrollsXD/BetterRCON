@@ -137,7 +137,7 @@ namespace BetterRCON
 
         }
 
-        private void ResetBtn_Click(object sender, EventArgs e)
+            private void ResetBtn_Click(object sender, EventArgs e)
         {
             IPTextBox.Text = "";
             PortTextBox.Text = "";
@@ -147,5 +147,14 @@ namespace BetterRCON
             Properties.Settings.Default.Password = PasswordTextBox.Text;
             Properties.Settings.Default.Save();
         }
+
+        private void CMDInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendBTN.PerformClick();
+            }
+        }
     }
-}
+
+    }

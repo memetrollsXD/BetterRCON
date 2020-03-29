@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Tabs = new System.Windows.Forms.TabControl();
             this.RCON = new System.Windows.Forms.TabPage();
             this.Output = new System.Windows.Forms.TextBox();
@@ -102,7 +103,7 @@
             this.SendBTN.Margin = new System.Windows.Forms.Padding(4);
             this.SendBTN.Name = "SendBTN";
             this.SendBTN.Size = new System.Drawing.Size(100, 28);
-            this.SendBTN.TabIndex = 4;
+            this.SendBTN.TabIndex = 2;
             this.SendBTN.Text = "Send";
             this.SendBTN.UseVisualStyleBackColor = true;
             this.SendBTN.Click += new System.EventHandler(this.SendBTN_Click);
@@ -114,9 +115,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CMDInput.Location = new System.Drawing.Point(12, 464);
             this.CMDInput.Margin = new System.Windows.Forms.Padding(4);
+            this.CMDInput.Multiline = true;
             this.CMDInput.Name = "CMDInput";
             this.CMDInput.Size = new System.Drawing.Size(1007, 22);
-            this.CMDInput.TabIndex = 3;
+            this.CMDInput.TabIndex = 1;
+            this.CMDInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CMDInput_KeyDown);
             // 
             // Settings
             // 
@@ -269,6 +272,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1148, 528);
             this.Controls.Add(this.Tabs);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "BetterRCON";
