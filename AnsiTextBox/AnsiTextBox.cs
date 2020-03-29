@@ -34,6 +34,10 @@ namespace BetterRCON
                 bytes[i] = (byte)str[i];
             }
             screenS.Write(bytes, 0, bytes.Length);
+            // set the current caret position to the end
+            SelectionStart = Text.Length;
+            // scroll it automatically
+            ScrollToCaret();
         }
 
         public void SetTab(IAnsiDecoder _sender)

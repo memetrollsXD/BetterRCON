@@ -89,10 +89,13 @@ namespace BetterRCON
         {
 
             string txt = CMDInput.Text;
+            historyStrings.Add(txt);
+            historyPointer = historyStrings.Count;
             byte[] byteArrary = System.Text.UTF8Encoding.GetEncoding("UTF-8").GetBytes(txt);
             txt = System.Text.ASCIIEncoding.GetEncoding("ASCII").GetString(byteArrary);
             var answer3 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, txt); //!
-            Output.AppendText(answer3 + "\r\n");
+            Output.AppendText("\u001b[0m"); // reset colors
+            Output.AppendText(answer3);
             CMDInput.Text = "";
         }
 
@@ -158,6 +161,26 @@ namespace BetterRCON
 
         private void CMDInput_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Up)
+            {
+                if (historyPointer > 0)
+                {
+                    historyPointer--;
+                    CMDInput.Text = historyStrings[historyPointer];
+                }
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                if (historyPointer < historyStrings.Count - 1)
+                {
+                    historyPointer++;
+                    CMDInput.Text = historyStrings[historyPointer];
+                }
+                else
+                {
+                    CMDInput.Text = "";
+                }
+            }
             if (e.KeyCode == Keys.Enter)
             {
                 SendBTN.PerformClick();
@@ -167,6 +190,8 @@ namespace BetterRCON
         }
 
         OtherRCON RCONClient = new OtherRCON();
+        int historyPointer = 0;
+        List<string> historyStrings = new List<string>();
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
