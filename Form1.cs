@@ -27,7 +27,6 @@ namespace BetterRCON
                 MessageBox.Show("Welcome to BetterRCON!");
             }
             //var rcon = RCONClient.INSTANCE;
-            //rcon.setupStream("play.memetrolls.net", password: "drugslord");
             //var answer = rcon.sendMessage(RCONMessageType.Command, "echo RCON Connection Established");
             // var answer2 = rcon.sendMessage(RCONMessageType.Command, "list");
             //Output.AppendText(answer.RemoveColorCodes() + "\r\n");
@@ -95,12 +94,6 @@ namespace BetterRCON
             CMDInput.Text = "";
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            IPTextBox.Text = "play.memetrolls.net";
-            PortTextBox.Text = "25575";
-
-        }
 
         private void PortTextBox_TextChanged(object sender, EventArgs e)
         {
