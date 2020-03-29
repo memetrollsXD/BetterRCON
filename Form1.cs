@@ -131,7 +131,7 @@ namespace BetterRCON
             return;
             */
             int x = Int32.Parse(PortTextBox.Text);
-            RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text);
+            RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text, OtherRCON.RCONColorMode.ANSI);
             var answer = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "echo RCON Connection Established");
             var answer2 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
             Output.AppendText(answer);

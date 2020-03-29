@@ -26,11 +26,18 @@ namespace BetterRCON
             ResponseValue
         }
 
-        public OtherRCON(string host, int port, string password)
+        public enum RCONColorMode
+        {
+            AS_IS,
+            ANSI,
+            STRIP
+        }
+
+        public OtherRCON(string host, int port, string password, RCONColorMode colormode)
         {
             m_uid = 1;
             m_sender = null;
-            setupStream(host, port, password);
+            setupStream(host, port, password, colormode);
         }
 
         public OtherRCON()
@@ -39,6 +46,7 @@ namespace BetterRCON
             m_host = null;
             m_password = null;
             m_sender = null;
+            m_colormode = RCONColorMode.AS_IS;
         }
 
         public void ConnectSocket()
@@ -213,11 +221,14 @@ namespace BetterRCON
         protected int m_uid;
         protected Socket m_sender;
 
-        public void setupStream(string host, int port, string password)
+        public RCONColorMode m_colormode { get; private set; }
+
+        public void setupStream(string host, int port, string password, RCONColorMode colormode)
         {
             m_host = host;
             m_port = port;
             m_password = password;
+            m_colormode = colormode;
             ConnectSocket();
             sendMessage(RCONMessageType.Auth, m_password);
         }
@@ -252,15 +263,52 @@ namespace BetterRCON
             string remotemsg = "";
             RCONMessageType receiveType = RCONMessageType.AuthFail;
             unpack_msg(response.ToArray(), ref receiveType, ref remotemsg);
-            if (true)
+            switch (m_colormode)
             {
-                remotemsg = ConvertColorCodes(remotemsg);
+                case RCONColorMode.ANSI:
+                    remotemsg = ConvertColorCodesToAnsi(remotemsg);
+                    break;
+                case RCONColorMode.AS_IS:
+                    // do nothing
+                    break;
+                case RCONColorMode.STRIP:
+                    remotemsg = StripColorCodes(remotemsg);
+                    break;
             }
             return remotemsg;
         }
 
-        public string ConvertColorCodes(string remotemsg)
+        private string StripColorCodes(string remotemsg)
         {
+            // quick and dirty version
+            remotemsg = remotemsg.Replace("\xc2\u00A74", ""); // dark_red
+            remotemsg = remotemsg.Replace("\xc2\u00A7c", ""); // red
+            remotemsg = remotemsg.Replace("\xc2\u00A76", ""); // gold
+            remotemsg = remotemsg.Replace("\xc2\u00A7e", ""); // yellow
+            remotemsg = remotemsg.Replace("\xc2\u00A72", ""); // dark_green
+            remotemsg = remotemsg.Replace("\xc2\u00A7a", ""); // green
+            remotemsg = remotemsg.Replace("\xc2\u00A7b", ""); // aqua
+            remotemsg = remotemsg.Replace("\xc2\u00A73", ""); // dark_aqua
+            remotemsg = remotemsg.Replace("\xc2\u00A71", ""); // dark_blue
+            remotemsg = remotemsg.Replace("\xc2\u00A79", ""); // dark_blue
+            remotemsg = remotemsg.Replace("\xc2\u00A7d", ""); // light_purple
+            remotemsg = remotemsg.Replace("\xc2\u00A75", ""); // dark_purple
+            remotemsg = remotemsg.Replace("\xc2\u00A7f", ""); // white
+            remotemsg = remotemsg.Replace("\xc2\u00A77", ""); // gray
+            remotemsg = remotemsg.Replace("\xc2\u00A78", ""); // dark_gray
+            remotemsg = remotemsg.Replace("\xc2\u00A70", ""); // black
+            remotemsg = remotemsg.Replace("\xc2\u00A7r", ""); // reset
+            remotemsg = remotemsg.Replace("\xc2\u00A7l", ""); // bold
+            remotemsg = remotemsg.Replace("\xc2\u00A7o", ""); // italic
+            remotemsg = remotemsg.Replace("\xc2\u00A7m", ""); // stike
+            remotemsg = remotemsg.Replace("\xc2\u00A7n", ""); // underline
+            remotemsg = remotemsg.Replace("\xc2\u00A7k", ""); // we dont know
+            return remotemsg;
+        }
+
+        public string ConvertColorCodesToAnsi(string remotemsg)
+        {
+            // still to-do: The light and the dark version are the same now. ansi module needs to be updated as well
             remotemsg = remotemsg.Replace("\xc2\u00A74", "\u001b[0;31m"); // dark_red
             remotemsg = remotemsg.Replace("\xc2\u00A7c", "\u001b[0;31m"); // red
             remotemsg = remotemsg.Replace("\xc2\u00A76", "\u001b[0;33m"); // gold
