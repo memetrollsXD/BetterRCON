@@ -12,7 +12,7 @@ namespace BetterRCON
             vt100 = new AnsiDecoder();
             screenS = new ScreenStream();
             screenS.InjectTo = vt100;
-            vt100.Encoding = System.Text.Encoding.GetEncoding("ASCII");
+            vt100.Encoding = System.Text.UTF8Encoding.UTF8; // System.Text.Encoding.GetEncoding("UTF-8");
             vt100.Subscribe(this);
         }
 
@@ -25,7 +25,7 @@ namespace BetterRCON
 
         public new void AppendText(string str)
         {
-            byte[] bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(str);
+            byte[] bytes = System.Text.UTF8Encoding.UTF8.GetBytes(str);
             screenS.Write(bytes, 0, bytes.Length);
         }
 
