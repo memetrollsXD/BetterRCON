@@ -1,5 +1,4 @@
-﻿using MinecraftServerRCON;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +18,8 @@ namespace BetterRCON
         public Form1()
         {
             InitializeComponent();
-            if (Properties.Settings.Default.IsPotato.Equals(true)) {
+            if (Properties.Settings.Default.IsPotato.Equals(true))
+            {
                 MessageBox.Show("No potatoes allowed!");
             }
             if (Properties.Settings.Default.FirstTime.Equals(true))
@@ -39,12 +39,13 @@ namespace BetterRCON
             PortTextBox.Text = Properties.Settings.Default.Port;
             PasswordTextBox.Text = Properties.Settings.Default.Password;
             Tabs.SelectedIndex = 1;
-    }
+        }
 
         private void SaveBtn_Click(object sender, EventArgs e) // Saves doesn't send
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            if (Properties.Settings.Default.FirstTime.Equals(true)) {
+            if (Properties.Settings.Default.FirstTime.Equals(true))
+            {
                 Properties.Settings.Default.FirstTime = false;
                 Directory.CreateDirectory(path + "\\BetterRCON");
             }
@@ -75,22 +76,22 @@ namespace BetterRCON
             dialog.Multiselect = false;
             dialog.CheckFileExists = true;
             dialog.ValidateNames = true;
-            if(dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
                 ConnectionData data = Deserialize(File.ReadAllBytes(dialog.FileName));
                 // I dont understand any of this
                 IPTextBox.Text = data.IP;
                 PortTextBox.Text = data.Port.ToString();
                 PasswordTextBox.Text = data.Password;
-            } 
-        } 
+            }
+        }
         private void SendBTN_Click(object sender, EventArgs e) // Sends doesn't save
         {
 
             string txt = CMDInput.Text;
             byte[] byteArrary = System.Text.UTF8Encoding.GetEncoding("UTF-8").GetBytes(txt);
             txt = System.Text.ASCIIEncoding.GetEncoding("ASCII").GetString(byteArrary);
-            var answer3 = RCONClient.INSTANCE.sendMessage(RCONMessageType.Command, txt); //!
+            var answer3 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, txt); //!
             Output.AppendText(answer3 + "\r\n");
             CMDInput.Text = "";
         }
@@ -122,10 +123,16 @@ namespace BetterRCON
 
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
+            /*
+            string a = "§6There are §c0§6 out of maximum §c1,000§6 players online.\n";
+            Output.AppendText(a);
+            Tabs.SelectedIndex = 0;
+            return;
+            */
             int x = Int32.Parse(PortTextBox.Text);
-            RCONClient.INSTANCE.setupStream(IPTextBox.Text, x, password: PasswordTextBox.Text);
-            var answer = RCONClient.INSTANCE.sendMessage(RCONMessageType.Command, "echo RCON Connection Established");
-            var answer2 = RCONClient.INSTANCE.sendMessage(RCONMessageType.Command, "list");
+            RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text);
+            var answer = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "echo RCON Connection Established");
+            var answer2 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
             Output.AppendText(answer + "\r\n");
             Output.AppendText(answer2 + "\r\n");
             Tabs.SelectedIndex = 0;
@@ -138,7 +145,7 @@ namespace BetterRCON
 
         }
 
-            private void ResetBtn_Click(object sender, EventArgs e)
+        private void ResetBtn_Click(object sender, EventArgs e)
         {
             IPTextBox.Text = "";
             PortTextBox.Text = "";
@@ -154,8 +161,17 @@ namespace BetterRCON
             if (e.KeyCode == Keys.Enter)
             {
                 SendBTN.PerformClick();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
+        }
+
+        OtherRCON RCONClient = new OtherRCON();
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            RCONClient.Dispose();
         }
     }
 
-    }
+}

@@ -25,7 +25,14 @@ namespace BetterRCON
 
         public new void AppendText(string str)
         {
+            /*
             byte[] bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(str);
+            */
+            byte[] bytes = new byte[str.Length];
+            for (int i = 0; i < str.Length; ++i)
+            {
+                bytes[i] = (byte)str[i];
+            }
             screenS.Write(bytes, 0, bytes.Length);
         }
 

@@ -30,7 +30,6 @@
         {
             this.Tabs = new System.Windows.Forms.TabControl();
             this.RCON = new System.Windows.Forms.TabPage();
-            this.Output = new BetterRCON.AnsiTextBox();
             this.SendBTN = new System.Windows.Forms.Button();
             this.CMDInput = new System.Windows.Forms.TextBox();
             this.Settings = new System.Windows.Forms.TabPage();
@@ -45,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.Output = new BetterRCON.AnsiTextBox();
             this.Tabs.SuspendLayout();
             this.RCON.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -70,25 +70,11 @@
             this.RCON.Controls.Add(this.CMDInput);
             this.RCON.Location = new System.Drawing.Point(4, 22);
             this.RCON.Name = "RCON";
-            this.RCON.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.RCON.Padding = new System.Windows.Forms.Padding(3);
             this.RCON.Size = new System.Drawing.Size(855, 405);
             this.RCON.TabIndex = 0;
             this.RCON.Text = "RCON";
             this.RCON.UseVisualStyleBackColor = true;
-            // 
-            // Output
-            // 
-            this.Output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Output.BackColor = System.Drawing.Color.Black;
-            this.Output.ForeColor = System.Drawing.Color.White;
-            this.Output.Location = new System.Drawing.Point(9, 7);
-            this.Output.Name = "Output";
-            this.Output.ReadOnly = true;
-            this.Output.Size = new System.Drawing.Size(837, 364);
-            this.Output.TabIndex = 5;
-            this.Output.Text = "";
             // 
             // SendBTN
             // 
@@ -112,6 +98,7 @@
             this.CMDInput.Name = "CMDInput";
             this.CMDInput.Size = new System.Drawing.Size(756, 20);
             this.CMDInput.TabIndex = 3;
+            this.CMDInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CMDInput_KeyDown);
             // 
             // Settings
             // 
@@ -135,7 +122,7 @@
             // ResetBtn
             // 
             this.ResetBtn.Location = new System.Drawing.Point(260, 222);
-            this.ResetBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ResetBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ResetBtn.Name = "ResetBtn";
             this.ResetBtn.Size = new System.Drawing.Size(71, 38);
             this.ResetBtn.TabIndex = 12;
@@ -146,7 +133,7 @@
             // ConnectBtn
             // 
             this.ConnectBtn.Location = new System.Drawing.Point(488, 222);
-            this.ConnectBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ConnectBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ConnectBtn.Name = "ConnectBtn";
             this.ConnectBtn.Size = new System.Drawing.Size(76, 38);
             this.ConnectBtn.TabIndex = 13;
@@ -157,7 +144,7 @@
             // LoadBtn
             // 
             this.LoadBtn.Location = new System.Drawing.Point(376, 266);
-            this.LoadBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LoadBtn.Margin = new System.Windows.Forms.Padding(2);
             this.LoadBtn.Name = "LoadBtn";
             this.LoadBtn.Size = new System.Drawing.Size(77, 38);
             this.LoadBtn.TabIndex = 7;
@@ -253,15 +240,30 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // Output
+            // 
+            this.Output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Output.BackColor = System.Drawing.Color.Black;
+            this.Output.ForeColor = System.Drawing.Color.White;
+            this.Output.Location = new System.Drawing.Point(9, 7);
+            this.Output.Name = "Output";
+            this.Output.ReadOnly = true;
+            this.Output.Size = new System.Drawing.Size(837, 364);
+            this.Output.TabIndex = 5;
+            this.Output.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(861, 429);
             this.Controls.Add(this.Tabs);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "BetterRCON";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Tabs.ResumeLayout(false);
             this.RCON.ResumeLayout(false);
             this.RCON.PerformLayout();
