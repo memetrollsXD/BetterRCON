@@ -52,6 +52,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnsiTextBox\AnsiTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AnsiTextBox\ScreenStream.cs" />
+    <Compile Include="AnsiTextBox\src\AnsiDecoder.cs" />
+    <Compile Include="AnsiTextBox\src\EscapeCharacterDecoder.cs" />
+    <Compile Include="AnsiTextBox\src\IAnsiDecoder.cs" />
+    <Compile Include="AnsiTextBox\src\IAnsiDecoderClient.cs" />
+    <Compile Include="AnsiTextBox\src\IDecoder.cs" />
+    <Compile Include="AnsiTextBox\src\InvalidByteException.cs" />
+    <Compile Include="AnsiTextBox\src\InvalidCommandException.cs" />
+    <Compile Include="AnsiTextBox\src\InvalidParameterException.cs" />
+    <Compile Include="AnsiTextBox\src\TerminalFrameBuffer.cs" />
     <Compile Include="ConnectionData.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
