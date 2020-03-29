@@ -29,6 +29,7 @@ namespace BetterRCON
             //var rcon = RCONClient.INSTANCE;
             //var answer = rcon.sendMessage(RCONMessageType.Command, "echo RCON Connection Established");
             // var answer2 = rcon.sendMessage(RCONMessageType.Command, "list");
+            // note: dont remove the color codes anymore - we have a cool color richtext control
             //Output.AppendText(answer.RemoveColorCodes() + "\r\n");
             // Output.AppendText(answer2.RemoveColorCodes() + "\r\n");
 
@@ -90,7 +91,7 @@ namespace BetterRCON
             byte[] byteArrary = System.Text.UTF8Encoding.GetEncoding("UTF-8").GetBytes(txt);
             txt = System.Text.ASCIIEncoding.GetEncoding("ASCII").GetString(byteArrary);
             var answer3 = RCONClient.INSTANCE.sendMessage(RCONMessageType.Command, txt); //!
-            Output.AppendText(answer3.RemoveColorCodes() + "\r\n");
+            Output.AppendText(answer3 + "\r\n");
             CMDInput.Text = "";
         }
 
@@ -125,8 +126,8 @@ namespace BetterRCON
             RCONClient.INSTANCE.setupStream(IPTextBox.Text, x, password: PasswordTextBox.Text);
             var answer = RCONClient.INSTANCE.sendMessage(RCONMessageType.Command, "echo RCON Connection Established");
             var answer2 = RCONClient.INSTANCE.sendMessage(RCONMessageType.Command, "list");
-            Output.AppendText(answer.RemoveColorCodes() + "\r\n");
-            Output.AppendText(answer2.RemoveColorCodes() + "\r\n");
+            Output.AppendText(answer + "\r\n");
+            Output.AppendText(answer2 + "\r\n");
             Tabs.SelectedIndex = 0;
             Properties.Settings.Default.HasConnected = true;
             Properties.Settings.Default.FirstTime = false;
