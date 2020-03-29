@@ -149,6 +149,8 @@ namespace BetterRCON
             // Release the socket.  
             m_sender.Shutdown(SocketShutdown.Both);
             m_sender.Close();
+            m_sender.Dispose();
+            m_sender = null;
         }
 
         protected byte[] INT2LE(int data)

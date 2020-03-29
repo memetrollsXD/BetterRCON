@@ -91,9 +91,7 @@ namespace BetterRCON
             string txt = CMDInput.Text;
             historyStrings.Add(txt);
             historyPointer = historyStrings.Count;
-            byte[] byteArrary = System.Text.UTF8Encoding.GetEncoding("UTF-8").GetBytes(txt);
-            txt = System.Text.ASCIIEncoding.GetEncoding("ASCII").GetString(byteArrary);
-            var answer3 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, txt); //!
+            var answer3 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, txt);
             Output.AppendText("\u001b[0m"); // reset colors
             Output.AppendText(answer3);
             CMDInput.Text = "";
@@ -136,8 +134,8 @@ namespace BetterRCON
             RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text);
             var answer = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "echo RCON Connection Established");
             var answer2 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
-            Output.AppendText(answer + "\r\n");
-            Output.AppendText(answer2 + "\r\n");
+            Output.AppendText(answer);
+            Output.AppendText(answer2);
             Tabs.SelectedIndex = 0;
             Properties.Settings.Default.HasConnected = true;
             Properties.Settings.Default.FirstTime = false;

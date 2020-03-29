@@ -25,9 +25,6 @@ namespace BetterRCON
 
         public new void AppendText(string str)
         {
-            /*
-            byte[] bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(str);
-            */
             byte[] bytes = new byte[str.Length];
             for (int i = 0; i < str.Length; ++i)
             {
@@ -128,6 +125,8 @@ namespace BetterRCON
                 {
                     /// all attributes off
                     case GraphicRendition.Reset:
+                        currentForegroundColor = ForeColor;
+                        currentBackgroundColor = BackColor;
                         break;
                     /// Intensity: Bold
                     case GraphicRendition.Bold:
