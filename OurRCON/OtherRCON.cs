@@ -21,8 +21,8 @@ namespace ChimitRCON
         {
             None = -1,
             Auth = 3,
-            AuthResponse = 2,
             Command = 2,
+            AuthResponse = 2,
             ResponseValue = 0
         }
 
