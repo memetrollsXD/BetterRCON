@@ -310,7 +310,7 @@ namespace ChimitRCON
             remotemsg = remotemsg.Replace("\xc2\u00A75", "\u001b[1;35m"); // dark_purple
             remotemsg = remotemsg.Replace("\xc2\u00A7f", "\u001b[0;35m"); // white
             remotemsg = remotemsg.Replace("\xc2\u00A77", "\u001b[1;30m"); // gray
-            remotemsg = remotemsg.Replace("\xc2\u00A78", "\u001b[0;30m"); // dark_gray
+            remotemsg = remotemsg.Replace("\xc2\u00A78", "\u001b[1;30m"); // dark_gray
             remotemsg = remotemsg.Replace("\xc2\u00A70", "\u001b[0;30m"); // black
             remotemsg = remotemsg.Replace("\xc2\u00A7r", "\u001b[0m"); // reset
             remotemsg = remotemsg.Replace("\xc2\u00A7l", "\u001b[1m"); // bold

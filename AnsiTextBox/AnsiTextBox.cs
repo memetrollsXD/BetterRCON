@@ -190,6 +190,7 @@ namespace ChimitAnsi
                         break;
                     /// Intensity: Normal     not bold and not faint
                     case GraphicRendition.NormalIntensity:
+                        currentFontStyle = FontStyle.Regular;
                         break;
                     /// Underline: None     
                     case GraphicRendition.NoUnderline:
@@ -264,7 +265,7 @@ namespace ChimitAnsi
                         break;
                     /// Set foreground color, high intensity (aixtem)
                     case GraphicRendition.ForegroundBrightBlack:
-                        currentForegroundColor = Color.Gray;
+                        currentForegroundColor = Color.LightGray;
                         break;
                     case GraphicRendition.ForegroundBrightRed:
                         currentForegroundColor = Color.Orange;
@@ -288,11 +289,12 @@ namespace ChimitAnsi
                         currentForegroundColor = Color.White;
                         break;
                     case GraphicRendition.ForegroundBrightReset:
+                        currentForegroundColor = ForeColor;
                         // todo
                         break;
                     /// Set background color, high intensity (aixterm)
                     case GraphicRendition.BackgroundBrightBlack:
-                        currentBackgroundColor = Color.Gray;
+                        currentBackgroundColor = Color.LightGray;
                         break;
                     case GraphicRendition.BackgroundBrightRed:
                         currentBackgroundColor = Color.Orange;
@@ -316,6 +318,7 @@ namespace ChimitAnsi
                         currentBackgroundColor = Color.White;
                         break;
                     case GraphicRendition.BackgroundBrightReset:
+                        currentBackgroundColor = BackColor;
                         // todo
                         break;
                 }
