@@ -195,10 +195,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTextBox.Location = new System.Drawing.Point(464, 196);
+            this.PasswordTextBox.Multiline = true;
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = '*';
             this.PasswordTextBox.Size = new System.Drawing.Size(129, 20);
             this.PasswordTextBox.TabIndex = 5;
+            this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // IPTextBox
             // 
@@ -218,7 +220,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label3.Location = new System.Drawing.Point(461, 154);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(148, 39);
+            this.label3.Size = new System.Drawing.Size(145, 39);
             this.label3.TabIndex = 2;
             this.label3.Text = "Password";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
