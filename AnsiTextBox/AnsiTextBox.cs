@@ -14,6 +14,7 @@ namespace BetterRCON
             screenS.InjectTo = vt100;
             vt100.Encoding = System.Text.Encoding.GetEncoding("ASCII");
             vt100.Subscribe(this);
+            SuppressColorCodes = false;
         }
 
         protected override void OnCreateControl()
@@ -23,7 +24,7 @@ namespace BetterRCON
             currentBackgroundColor = BackColor;
         }
 
-        public new void AppendText(string str)
+        public virtual new void AppendText(string str)
         {
             if (str.Length == 0)
             {
@@ -59,10 +60,13 @@ namespace BetterRCON
             {
                 currentBackgroundColor = BackColor;
             }
-            SelectionStart = TextLength;
-            SelectionLength = 0;
-            SelectionColor = currentForegroundColor.GetValueOrDefault();
-            SelectionBackColor = currentBackgroundColor.GetValueOrDefault();
+            if (!SuppressColorCodes)
+            {
+                SelectionStart = TextLength;
+                SelectionLength = 0;
+                SelectionColor = currentForegroundColor.GetValueOrDefault();
+                SelectionBackColor = currentBackgroundColor.GetValueOrDefault();
+            }
             base.AppendText(new string(_chars));
         }
 
@@ -312,6 +316,8 @@ namespace BetterRCON
         public void SetProperty(IAnsiDecoder _sender, PropertyTypes type, string value)
         {
         }
+
+        public bool SuppressColorCodes { get; set; }
 
         private IAnsiDecoder vt100;
         private ScreenStream screenS;
