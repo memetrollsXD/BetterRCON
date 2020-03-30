@@ -92,7 +92,7 @@ namespace BetterRCON
             historyStrings.Add(txt);
             historyPointer = historyStrings.Count;
             var answer3 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, txt);
-            Output.AppendText("\u001b[0m"); // reset colors
+            Output.AppendText(AnsiOutput.Reset()); // reset colors
             Output.AppendText(txt + "\n");
             Output.AppendText(answer3);
             CMDInput.Text = "";
@@ -125,13 +125,7 @@ namespace BetterRCON
 
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
-            /*
-            string a = "§6There are §c0§6 out of maximum §c1,000§6 players online.\n";
-            Output.AppendText(a);
-            Tabs.SelectedIndex = 0;
-            return;
-            */
-            Output.AppendText("\x1b[2J\u001b[0m"); // cls & reset colors
+            Output.AppendText(AnsiOutput.cls());
             int x = Int32.Parse(PortTextBox.Text);
             RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text, OtherRCON.RCONColorMode.ANSI);
             var answer = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "echo RCON Connection Established");
