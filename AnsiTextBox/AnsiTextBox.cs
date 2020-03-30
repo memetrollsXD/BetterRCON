@@ -16,7 +16,6 @@ namespace ChimitAnsi
             vt100.Encoding = System.Text.Encoding.GetEncoding("ASCII");
             vt100.Subscribe(this);
             SuppressColorCodes = false;
-            currentFontStyle = DefaultFont.Style;
         }
 
     protected override void OnCreateControl()
@@ -24,6 +23,7 @@ namespace ChimitAnsi
             base.OnCreateControl();
             currentForegroundColor = ForeColor;
             currentBackgroundColor = BackColor;
+            currentFont = DefaultFont;
         }
 
         /// <summary>
@@ -69,17 +69,13 @@ namespace ChimitAnsi
             {
                 currentBackgroundColor = BackColor;
             }
-            if (null == currentFontStyle)
-            {
-                currentFontStyle = DefaultFont.Style;
-            }
             if (!SuppressColorCodes)
             {
                 SelectionStart = TextLength;
                 SelectionLength = 0;
                 SelectionColor = currentForegroundColor.GetValueOrDefault();
                 SelectionBackColor = currentBackgroundColor.GetValueOrDefault();
-                SelectionFont = new Font(DefaultFont, currentFontStyle.GetValueOrDefault());
+                SelectionFont = currentFont;
             }
             base.AppendText(new string(_chars));
         }
@@ -149,22 +145,22 @@ namespace ChimitAnsi
                     case GraphicRendition.Reset:
                         currentForegroundColor = ForeColor;
                         currentBackgroundColor = BackColor;
-                        currentFontStyle = FontStyle.Regular;
+                        currentFont = new Font(DefaultFont, FontStyle.Regular);
                         break;
                     /// Intensity: Bold
                     case GraphicRendition.Bold:
-                        currentFontStyle = FontStyle.Bold;
+                        currentFont = new Font(DefaultFont, FontStyle.Bold);
                         break;
                     /// Intensity: Faint     not widely supported
                     case GraphicRendition.Faint:
                         break;
                     /// Italic: on     not widely supported. Sometimes treated as inverse.
                     case GraphicRendition.Italic:
-                        currentFontStyle = FontStyle.Italic;
+                        currentFont = new Font(DefaultFont, FontStyle.Italic);
                         break;
                     /// Underline: Single     not widely supported
                     case GraphicRendition.Underline:
-                        currentFontStyle = FontStyle.Underline;
+                        currentFont = new Font(DefaultFont, FontStyle.Underline);
                         break;
                     /// Blink: Slow     less than 150 per minute
                     case GraphicRendition.BlinkSlow:
@@ -186,15 +182,15 @@ namespace ChimitAnsi
                         break;
                     /// Underline: Double
                     case GraphicRendition.UnderlineDouble:
-                        currentFontStyle = FontStyle.Strikeout;
+                        currentFont = new Font(DefaultFont, FontStyle.Strikeout);
                         break;
                     /// Intensity: Normal     not bold and not faint
                     case GraphicRendition.NormalIntensity:
-                        currentFontStyle = FontStyle.Regular;
+                        currentFont = DefaultFont;
                         break;
                     /// Underline: None     
                     case GraphicRendition.NoUnderline:
-                        currentFontStyle = FontStyle.Regular;
+                        currentFont = DefaultFont;
                         break;
                     /// Blink: off     
                     case GraphicRendition.NoBlink:
@@ -355,6 +351,6 @@ namespace ChimitAnsi
         private ScreenStream screenS;
         private Color? currentBackgroundColor = null;
         private Color? currentForegroundColor = null;
-        private FontStyle? currentFontStyle = null;
+        private Font currentFont;
     }
 }
