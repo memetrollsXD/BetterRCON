@@ -4,7 +4,6 @@ namespace BetterRCON
 {
     public class AnsiOutput
     {
-
         public enum ColorCode
         {
             FG_BLACK = 30,
@@ -35,9 +34,7 @@ namespace BetterRCON
 
         public static string color(ColorCode code, string str)
         {
-            string res = String.Format("\x1b[{0}m", (int)code);
-            res += Reset();
-            return res;
+            return String.Format("\x1b[{0}m{1}{2}", (int)code, str, Reset());
         }
 
         public static string Reset()

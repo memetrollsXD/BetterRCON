@@ -19,11 +19,11 @@ namespace BetterRCON
     {
         public enum RCONMessageType
         {
-            Auth,
-            AuthResponse,
-            AuthFail,
-            Command,
-            ResponseValue
+            None = -1,
+            Auth = 3,
+            AuthResponse = 2,
+            Command = 2,
+            ResponseValue = 0
         }
 
         public enum RCONColorMode
@@ -177,7 +177,7 @@ namespace BetterRCON
             List<byte> blist = new List<byte>();
             blist.AddRange(INT2LE(msgsize)); // Size
             blist.AddRange(INT2LE(m_uid++)); // ID
-            blist.AddRange(INT2LE(RCONMessageTypeToInt(mtype))); // Type
+            blist.AddRange(INT2LE((int)mtype)); // Type
             blist.AddRange(STR2B(msg)); // Body, null terminated ascii string
             blist.AddRange(STR2B("")); // Null terminated empty string
             return blist.ToArray();
@@ -197,20 +197,6 @@ namespace BetterRCON
             }
             b[str.Length] = 0;
             return b;
-        }
-
-        protected int RCONMessageTypeToInt(RCONMessageType mtype)
-        {
-            switch (mtype)
-            {
-                case RCONMessageType.Auth: return 3; // Minecraft RCON login packet type
-                case RCONMessageType.AuthResponse: return 2; //Server auth response
-                case RCONMessageType.AuthFail: return -1; // Auth failure (password invalid)
-                case RCONMessageType.Command: return 2; //  Command packet type
-                case RCONMessageType.ResponseValue: return 0; //  Server response
-                default:
-                    return -1;
-            }
         }
 
         public void Dispose()
@@ -261,7 +247,7 @@ namespace BetterRCON
                 }
             } while (!PacketComplete(response.ToArray()));
             string remotemsg = "";
-            RCONMessageType receiveType = RCONMessageType.AuthFail;
+            RCONMessageType receiveType = RCONMessageType.None;
             unpack_msg(response.ToArray(), ref receiveType, ref remotemsg);
             switch (m_colormode)
             {
@@ -340,7 +326,7 @@ namespace BetterRCON
             int len = LE2INT(packet, 0);
             int id = LE2INT(packet, 4);
             int command = LE2INT(packet, 8);
-            receiveType = IntToRCONMessageType(command);
+            receiveType = (RCONMessageType)command;
             remotemsg = "";
             for (int i = 12; 0 != packet[i]; ++i)
             {
@@ -350,17 +336,6 @@ namespace BetterRCON
             {
                 // error
             }
-        }
-
-        private RCONMessageType IntToRCONMessageType(int command)
-        {
-            switch (command)
-            {
-                case 0: return RCONMessageType.ResponseValue;
-                case 2: return RCONMessageType.ResponseValue;
-                case 3: return RCONMessageType.Auth;
-            }
-            return RCONMessageType.AuthFail;
         }
 
         protected bool PacketComplete(byte[] packet)

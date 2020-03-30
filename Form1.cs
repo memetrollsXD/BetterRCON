@@ -132,7 +132,7 @@ namespace BetterRCON
             var answer2 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
             if (String.IsNullOrEmpty(answer))
             {
-                Output.AppendText("Error connecting. Password incorrect?");
+                Output.AppendText(AnsiOutput.red("Error connecting.") + " Password incorrect?");
             }
             Output.AppendText(answer);
             Output.AppendText(answer2);
