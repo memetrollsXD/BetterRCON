@@ -200,7 +200,6 @@
             this.PasswordTextBox.PasswordChar = '*';
             this.PasswordTextBox.Size = new System.Drawing.Size(129, 20);
             this.PasswordTextBox.TabIndex = 5;
-            this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // IPTextBox
             // 
