@@ -7,6 +7,7 @@ namespace ChimitAnsi
 {
     public class AnsiTextBox : RichTextBox, IAnsiDecoderClient
     {
+
         public AnsiTextBox() : base()
         {
             vt100 = new AnsiDecoder();
@@ -17,11 +18,12 @@ namespace ChimitAnsi
             SuppressColorCodes = false;
         }
 
-        protected override void OnCreateControl()
+    protected override void OnCreateControl()
         {
             base.OnCreateControl();
             currentForegroundColor = ForeColor;
             currentBackgroundColor = BackColor;
+            currentFontStyle = DefaultFont.Style;
         }
 
         /// <summary>
@@ -67,12 +69,17 @@ namespace ChimitAnsi
             {
                 currentBackgroundColor = BackColor;
             }
+            if (null == currentFontStyle)
+            {
+                currentFontStyle = DefaultFont.Style;
+            }
             if (!SuppressColorCodes)
             {
                 SelectionStart = TextLength;
                 SelectionLength = 0;
                 SelectionColor = currentForegroundColor.GetValueOrDefault();
                 SelectionBackColor = currentBackgroundColor.GetValueOrDefault();
+                SelectionFont = new Font(DefaultFont, currentFontStyle.GetValueOrDefault());
             }
             base.AppendText(new string(_chars));
         }
@@ -142,18 +149,22 @@ namespace ChimitAnsi
                     case GraphicRendition.Reset:
                         currentForegroundColor = ForeColor;
                         currentBackgroundColor = BackColor;
+                        currentFontStyle = FontStyle.Regular;
                         break;
                     /// Intensity: Bold
                     case GraphicRendition.Bold:
+                        currentFontStyle = FontStyle.Bold;
                         break;
                     /// Intensity: Faint     not widely supported
                     case GraphicRendition.Faint:
                         break;
                     /// Italic: on     not widely supported. Sometimes treated as inverse.
                     case GraphicRendition.Italic:
+                        currentFontStyle = FontStyle.Italic;
                         break;
                     /// Underline: Single     not widely supported
                     case GraphicRendition.Underline:
+                        currentFontStyle = FontStyle.Underline;
                         break;
                     /// Blink: Slow     less than 150 per minute
                     case GraphicRendition.BlinkSlow:
@@ -178,6 +189,7 @@ namespace ChimitAnsi
                         break;
                     /// Underline: None     
                     case GraphicRendition.NoUnderline:
+                        currentFontStyle = FontStyle.Regular;
                         break;
                     /// Blink: off     
                     case GraphicRendition.NoBlink:
@@ -248,7 +260,7 @@ namespace ChimitAnsi
                         break;
                     /// Set foreground color, high intensity (aixtem)
                     case GraphicRendition.ForegroundBrightBlack:
-                        currentForegroundColor = Color.Black;
+                        currentForegroundColor = Color.Gray;
                         break;
                     case GraphicRendition.ForegroundBrightRed:
                         currentForegroundColor = Color.Orange;
@@ -276,7 +288,7 @@ namespace ChimitAnsi
                         break;
                     /// Set background color, high intensity (aixterm)
                     case GraphicRendition.BackgroundBrightBlack:
-                        currentBackgroundColor = Color.Black;
+                        currentBackgroundColor = Color.Gray;
                         break;
                     case GraphicRendition.BackgroundBrightRed:
                         currentBackgroundColor = Color.Orange;
@@ -331,10 +343,11 @@ namespace ChimitAnsi
         ///   True if no color high lighting should be performed
         /// </remarks>
         public bool SuppressColorCodes { get; set; }
-
+ 
         private IAnsiDecoder vt100;
         private ScreenStream screenS;
         private Color? currentBackgroundColor = null;
         private Color? currentForegroundColor = null;
+        private FontStyle? currentFontStyle = null;
     }
 }

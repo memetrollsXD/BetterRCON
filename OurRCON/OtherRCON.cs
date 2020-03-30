@@ -309,14 +309,14 @@ namespace ChimitRCON
             remotemsg = remotemsg.Replace("\xc2\u00A7d", "\u001b[0;35m"); // light_purple
             remotemsg = remotemsg.Replace("\xc2\u00A75", "\u001b[1;35m"); // dark_purple
             remotemsg = remotemsg.Replace("\xc2\u00A7f", "\u001b[0;35m"); // white
-            remotemsg = remotemsg.Replace("\xc2\u00A77", "\u001b[1;37m"); // gray
+            remotemsg = remotemsg.Replace("\xc2\u00A77", "\u001b[1;30m"); // gray
             remotemsg = remotemsg.Replace("\xc2\u00A78", "\u001b[0;30m"); // dark_gray
             remotemsg = remotemsg.Replace("\xc2\u00A70", "\u001b[0;30m"); // black
             remotemsg = remotemsg.Replace("\xc2\u00A7r", "\u001b[0m"); // reset
-            remotemsg = remotemsg.Replace("\xc2\u00A7l", ""); // bold
-            remotemsg = remotemsg.Replace("\xc2\u00A7o", ""); // italic
-            remotemsg = remotemsg.Replace("\xc2\u00A7m", ""); // stike
-            remotemsg = remotemsg.Replace("\xc2\u00A7n", ""); // underline
+            remotemsg = remotemsg.Replace("\xc2\u00A7l", "\u001b[1m"); // bold
+            remotemsg = remotemsg.Replace("\xc2\u00A7o", "\u001b[3m"); // italic
+            remotemsg = remotemsg.Replace("\xc2\u00A7m", "\u001b[7m"); // strike (ansi-reversed)
+            remotemsg = remotemsg.Replace("\xc2\u00A7n", "\u001b[4m"); // underline
             remotemsg = remotemsg.Replace("\xc2\u00A7k", ""); // we dont know
             return remotemsg;
         }
