@@ -16,6 +16,7 @@ namespace ChimitAnsi
             vt100.Encoding = System.Text.Encoding.GetEncoding("ASCII");
             vt100.Subscribe(this);
             SuppressColorCodes = false;
+            currentFontStyle = DefaultFont.Style;
         }
 
     protected override void OnCreateControl()
@@ -23,7 +24,6 @@ namespace ChimitAnsi
             base.OnCreateControl();
             currentForegroundColor = ForeColor;
             currentBackgroundColor = BackColor;
-            currentFontStyle = DefaultFont.Style;
         }
 
         /// <summary>
