@@ -82,12 +82,37 @@ namespace ChimitAnsi
             return yellow(String.Format("{0}", num));
         }
 
+        public static string red(double num)
+        {
+            return red(String.Format("{0}", num));
+        }
+
+        public static string green(double num)
+        {
+            return green(String.Format("{0}", num));
+        }
+
+        public static string blue(double num)
+        {
+            return blue(String.Format("{0}", num));
+        }
+
+        public static string yellow(double num)
+        {
+            return yellow(String.Format("{0}", num));
+        }
+
         public static string defc(string str)
         {
             return color(ColorCode.FG_DEFAULT, str);
         }
 
         public static string defc(long num)
+        {
+            return defc(String.Format("{0}", num));
+        }
+
+        public static string defc(double num)
         {
             return defc(String.Format("{0}", num));
         }
