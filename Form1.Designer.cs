@@ -70,7 +70,7 @@
             this.RCON.Controls.Add(this.CMDInput);
             this.RCON.Location = new System.Drawing.Point(4, 22);
             this.RCON.Name = "RCON";
-            this.RCON.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.RCON.Padding = new System.Windows.Forms.Padding(3);
             this.RCON.Size = new System.Drawing.Size(855, 405);
             this.RCON.TabIndex = 0;
             this.RCON.Text = "RCON";
@@ -135,7 +135,7 @@
             // ResetBtn
             // 
             this.ResetBtn.Location = new System.Drawing.Point(260, 222);
-            this.ResetBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ResetBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ResetBtn.Name = "ResetBtn";
             this.ResetBtn.Size = new System.Drawing.Size(71, 38);
             this.ResetBtn.TabIndex = 12;
@@ -146,7 +146,7 @@
             // ConnectBtn
             // 
             this.ConnectBtn.Location = new System.Drawing.Point(488, 222);
-            this.ConnectBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ConnectBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ConnectBtn.Name = "ConnectBtn";
             this.ConnectBtn.Size = new System.Drawing.Size(76, 38);
             this.ConnectBtn.TabIndex = 13;
@@ -157,7 +157,7 @@
             // LoadBtn
             // 
             this.LoadBtn.Location = new System.Drawing.Point(376, 266);
-            this.LoadBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LoadBtn.Margin = new System.Windows.Forms.Padding(2);
             this.LoadBtn.Name = "LoadBtn";
             this.LoadBtn.Size = new System.Drawing.Size(77, 38);
             this.LoadBtn.TabIndex = 7;
@@ -208,10 +208,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTextBox.Location = new System.Drawing.Point(464, 196);
+            this.PasswordTextBox.Multiline = true;
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = '*';
             this.PasswordTextBox.Size = new System.Drawing.Size(129, 20);
             this.PasswordTextBox.TabIndex = 5;
+            this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // IPTextBox
             // 
@@ -231,7 +233,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label3.Location = new System.Drawing.Point(461, 154);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(148, 39);
+            this.label3.Size = new System.Drawing.Size(145, 39);
             this.label3.TabIndex = 2;
             this.label3.Text = "Password";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -259,7 +261,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(861, 429);
             this.Controls.Add(this.Tabs);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "BetterRCON";
             this.Tabs.ResumeLayout(false);

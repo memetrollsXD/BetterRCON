@@ -149,11 +149,19 @@ namespace BetterRCON
             Properties.Settings.Default.Save();
         }
 
-        private void CMDInput_KeyDown(object sender, KeyEventArgs e)
+        private void CMDInput_KeyDown(object sender, KeyEventArgs e) // Continue Here
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyData == Keys.Enter)
             {
                 SendBTN.PerformClick();
+            }
+        }
+
+        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                ConnectBtn.PerformClick();
             }
         }
     }
