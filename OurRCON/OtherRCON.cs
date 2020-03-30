@@ -290,7 +290,7 @@ namespace BetterRCON
             remotemsg = remotemsg.Replace("\xc2\u00A7b", ""); // aqua
             remotemsg = remotemsg.Replace("\xc2\u00A73", ""); // dark_aqua
             remotemsg = remotemsg.Replace("\xc2\u00A71", ""); // dark_blue
-            remotemsg = remotemsg.Replace("\xc2\u00A79", ""); // dark_blue
+            remotemsg = remotemsg.Replace("\xc2\u00A79", ""); // blue
             remotemsg = remotemsg.Replace("\xc2\u00A7d", ""); // light_purple
             remotemsg = remotemsg.Replace("\xc2\u00A75", ""); // dark_purple
             remotemsg = remotemsg.Replace("\xc2\u00A7f", ""); // white
@@ -310,21 +310,22 @@ namespace BetterRCON
         {
             // still to-do: The light and the dark version are the same now. ansi module needs to be updated as well
             remotemsg = remotemsg.Replace("\xc2\u00A74", "\u001b[0;31m"); // dark_red
-            remotemsg = remotemsg.Replace("\xc2\u00A7c", "\u001b[0;31m"); // red
-            remotemsg = remotemsg.Replace("\xc2\u00A76", "\u001b[0;33m"); // gold
+            remotemsg = remotemsg.Replace("\xc2\u00A7c", "\u001b[1;31m"); // red
+            remotemsg = remotemsg.Replace("\xc2\u00A76", "\u001b[1;33m"); // gold
             remotemsg = remotemsg.Replace("\xc2\u00A7e", "\u001b[0;33m"); // yellow
             remotemsg = remotemsg.Replace("\xc2\u00A72", "\u001b[0;32m"); // dark_green
-            remotemsg = remotemsg.Replace("\xc2\u00A7a", "\u001b[0;32m"); // green
-            remotemsg = remotemsg.Replace("\xc2\u00A7b", "\u001b[0;36m"); // aqua
-            remotemsg = remotemsg.Replace("\xc2\u00A73", "\u001b[0;36m"); // dark_aqua
+            remotemsg = remotemsg.Replace("\xc2\u00A7a", "\u001b[1;32m"); // green
+
+            remotemsg = remotemsg.Replace("\xc2\u00A7b", "\u001b[1;36m"); // aqua td
+            remotemsg = remotemsg.Replace("\xc2\u00A73", "\u001b[0;36m"); // dark_aqua td
             remotemsg = remotemsg.Replace("\xc2\u00A71", "\u001b[0;34m"); // dark_blue
-            remotemsg = remotemsg.Replace("\xc2\u00A79", "\u001b[0;34m"); // dark_blue
-            remotemsg = remotemsg.Replace("\xc2\u00A7d", "\u001b[0;34m"); // light_purple
-            remotemsg = remotemsg.Replace("\xc2\u00A75", "\u001b[0;35m"); // dark_purple
+            remotemsg = remotemsg.Replace("\xc2\u00A79", "\u001b[1;34m"); // blue
+            remotemsg = remotemsg.Replace("\xc2\u00A7d", "\u001b[0;35m"); // light_purple
+            remotemsg = remotemsg.Replace("\xc2\u00A75", "\u001b[1;35m"); // dark_purple
             remotemsg = remotemsg.Replace("\xc2\u00A7f", "\u001b[0;35m"); // white
             remotemsg = remotemsg.Replace("\xc2\u00A77", "\u001b[1;37m"); // gray
-            remotemsg = remotemsg.Replace("\xc2\u00A78", "\u001b[0;37m"); // dark_gray
-            remotemsg = remotemsg.Replace("\xc2\u00A70", "\u001b[1;30m"); // black
+            remotemsg = remotemsg.Replace("\xc2\u00A78", "\u001b[0;30m"); // dark_gray
+            remotemsg = remotemsg.Replace("\xc2\u00A70", "\u001b[0;30m"); // black
             remotemsg = remotemsg.Replace("\xc2\u00A7r", "\u001b[0m"); // reset
             remotemsg = remotemsg.Replace("\xc2\u00A7l", ""); // bold
             remotemsg = remotemsg.Replace("\xc2\u00A7o", ""); // italic

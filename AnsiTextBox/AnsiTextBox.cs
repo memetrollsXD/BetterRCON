@@ -233,41 +233,59 @@ namespace BetterRCON
                         break;
                     /// Set foreground color, high intensity (aixtem)
                     case GraphicRendition.ForegroundBrightBlack:
+                        currentForegroundColor = Color.Black;
                         break;
                     case GraphicRendition.ForegroundBrightRed:
+                        currentForegroundColor = Color.Orange;
                         break;
                     case GraphicRendition.ForegroundBrightGreen:
+                        currentForegroundColor = Color.LightGreen;
                         break;
                     case GraphicRendition.ForegroundBrightYellow:
+                        currentForegroundColor = Color.LightYellow;
                         break;
                     case GraphicRendition.ForegroundBrightBlue:
+                        currentForegroundColor = Color.LightBlue;
                         break;
                     case GraphicRendition.ForegroundBrightMagenta:
+                        currentForegroundColor = Color.Magenta;
                         break;
                     case GraphicRendition.ForegroundBrightCyan:
+                        currentForegroundColor = Color.LightCyan;
                         break;
                     case GraphicRendition.ForegroundBrightWhite:
+                        currentForegroundColor = Color.White;
                         break;
                     case GraphicRendition.ForegroundBrightReset:
+                        // todo
                         break;
                     /// Set background color, high intensity (aixterm)
                     case GraphicRendition.BackgroundBrightBlack:
+                        currentBackgroundColor = Color.Black;
                         break;
                     case GraphicRendition.BackgroundBrightRed:
+                        currentBackgroundColor = Color.Orange;
                         break;
                     case GraphicRendition.BackgroundBrightGreen:
+                        currentBackgroundColor = Color.LightGreen;
                         break;
                     case GraphicRendition.BackgroundBrightYellow:
+                        currentBackgroundColor = Color.LightYellow;
                         break;
                     case GraphicRendition.BackgroundBrightBlue:
+                        currentBackgroundColor = Color.LightBlue;
                         break;
                     case GraphicRendition.BackgroundBrightMagenta:
+                        currentBackgroundColor = Color.Magenta;
                         break;
                     case GraphicRendition.BackgroundBrightCyan:
+                        currentBackgroundColor = Color.LightCyan;
                         break;
                     case GraphicRendition.BackgroundBrightWhite:
+                        currentBackgroundColor = Color.White;
                         break;
                     case GraphicRendition.BackgroundBrightReset:
+                        // todo
                         break;
                 }
             }
