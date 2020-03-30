@@ -24,6 +24,13 @@ namespace BetterRCON
             currentBackgroundColor = BackColor;
         }
 
+        /// <summary>
+        ///     Displays the giving text in the rich text box
+        /// </summary>
+        /// <remarks>
+        ///     Takes a string parameter with ansi escape sequences
+        /// </remarks>
+        /// <param name="str"></param>
         public virtual new void AppendText(string str)
         {
             if (str.Length == 0)
@@ -317,6 +324,12 @@ namespace BetterRCON
         {
         }
 
+        /// <summary>
+        ///   If set to true, no colors or high lighting will be performed
+        /// </summary>
+        /// <remarks>
+        ///   True if no color high lighting should be performed
+        /// </remarks>
         public bool SuppressColorCodes { get; set; }
 
         private IAnsiDecoder vt100;

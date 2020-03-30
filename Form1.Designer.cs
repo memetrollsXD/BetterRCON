@@ -251,6 +251,7 @@
             this.Output.Name = "Output";
             this.Output.ReadOnly = true;
             this.Output.Size = new System.Drawing.Size(837, 364);
+            this.Output.SuppressColorCodes = false;
             this.Output.TabIndex = 5;
             this.Output.Text = "";
             // 
