@@ -174,6 +174,9 @@ namespace ChimitAnsi
                         break;
                     /// Image: Negative     inverse or reverse; swap foreground and background
                     case GraphicRendition.Inverse:
+                        Color? temp = currentForegroundColor;
+                        currentForegroundColor = currentBackgroundColor;
+                        currentBackgroundColor = temp;
                         break;
                     /// Conceal     not widely supported
                     case GraphicRendition.Conceal:
@@ -183,6 +186,7 @@ namespace ChimitAnsi
                         break;
                     /// Underline: Double
                     case GraphicRendition.UnderlineDouble:
+                        currentFontStyle = FontStyle.Strikeout;
                         break;
                     /// Intensity: Normal     not bold and not faint
                     case GraphicRendition.NormalIntensity:

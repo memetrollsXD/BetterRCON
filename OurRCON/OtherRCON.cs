@@ -286,7 +286,7 @@ namespace ChimitRCON
             remotemsg = remotemsg.Replace("\xc2\u00A7r", ""); // reset
             remotemsg = remotemsg.Replace("\xc2\u00A7l", ""); // bold
             remotemsg = remotemsg.Replace("\xc2\u00A7o", ""); // italic
-            remotemsg = remotemsg.Replace("\xc2\u00A7m", ""); // stike
+            remotemsg = remotemsg.Replace("\xc2\u00A7m", ""); // strike
             remotemsg = remotemsg.Replace("\xc2\u00A7n", ""); // underline
             remotemsg = remotemsg.Replace("\xc2\u00A7k", ""); // we dont know
             return remotemsg;
@@ -315,9 +315,9 @@ namespace ChimitRCON
             remotemsg = remotemsg.Replace("\xc2\u00A7r", "\u001b[0m"); // reset
             remotemsg = remotemsg.Replace("\xc2\u00A7l", "\u001b[1m"); // bold
             remotemsg = remotemsg.Replace("\xc2\u00A7o", "\u001b[3m"); // italic
-            remotemsg = remotemsg.Replace("\xc2\u00A7m", "\u001b[7m"); // strike (ansi-reversed)
+            remotemsg = remotemsg.Replace("\xc2\u00A7m", "\u001b[21m"); // strike
             remotemsg = remotemsg.Replace("\xc2\u00A7n", "\u001b[4m"); // underline
-            remotemsg = remotemsg.Replace("\xc2\u00A7k", ""); // we dont know
+            remotemsg = remotemsg.Replace("\xc2\u00A7k", "\u001b[7m"); // we dont know, reverse
             return remotemsg;
         }
 
