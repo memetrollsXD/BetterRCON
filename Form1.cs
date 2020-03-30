@@ -93,6 +93,7 @@ namespace BetterRCON
             historyPointer = historyStrings.Count;
             var answer3 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, txt);
             Output.AppendText("\u001b[0m"); // reset colors
+            Output.AppendText(txt + "\n");
             Output.AppendText(answer3);
             CMDInput.Text = "";
         }
@@ -130,10 +131,15 @@ namespace BetterRCON
             Tabs.SelectedIndex = 0;
             return;
             */
+            Output.AppendText("\x1b[2J\u001b[0m"); // cls & reset colors
             int x = Int32.Parse(PortTextBox.Text);
             RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text, OtherRCON.RCONColorMode.ANSI);
             var answer = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "echo RCON Connection Established");
             var answer2 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
+            if (String.IsNullOrEmpty(answer))
+            {
+                Output.AppendText("Error connecting. Password incorrect?");
+            }
             Output.AppendText(answer);
             Output.AppendText(answer2);
             Tabs.SelectedIndex = 0;
@@ -143,7 +149,6 @@ namespace BetterRCON
             Properties.Settings.Default.Port = PortTextBox.Text;
             Properties.Settings.Default.Password = PasswordTextBox.Text;
             Properties.Settings.Default.Save();
-
         }
 
         private void ResetBtn_Click(object sender, EventArgs e)

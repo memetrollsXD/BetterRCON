@@ -25,6 +25,10 @@ namespace BetterRCON
 
         public new void AppendText(string str)
         {
+            if (str.Length == 0)
+            {
+                return;
+            }
             byte[] bytes = new byte[str.Length];
             for (int i = 0; i < str.Length; ++i)
             {
@@ -289,6 +293,16 @@ namespace BetterRCON
                         break;
                 }
             }
+        }
+
+        public static string GetCodes()
+        {
+            string str = "";
+            for (int i = 30; i <= 38; ++i)
+            {
+                str += String.Format("\x1b[{0}m{1}\t\t\x1b[{2}m{3}\n", i, i, i + 60, i + 60);
+            }
+            return str;
         }
 
         public void ModeChanged(IAnsiDecoder _sender, AnsiMode _mode)
