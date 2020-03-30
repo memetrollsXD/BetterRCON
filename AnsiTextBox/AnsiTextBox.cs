@@ -10,7 +10,7 @@ namespace ChimitAnsi
         public AnsiTextBox() : base()
         {
             vt100 = new AnsiDecoder();
-            screenS = new BetterRCON.ScreenStream();
+            screenS = new ScreenStream();
             screenS.InjectTo = vt100;
             vt100.Encoding = System.Text.Encoding.GetEncoding("ASCII");
             vt100.Subscribe(this);
@@ -333,7 +333,7 @@ namespace ChimitAnsi
         public bool SuppressColorCodes { get; set; }
 
         private IAnsiDecoder vt100;
-        private BetterRCON.ScreenStream screenS;
+        private ScreenStream screenS;
         private Color? currentBackgroundColor = null;
         private Color? currentForegroundColor = null;
     }
