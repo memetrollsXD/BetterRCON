@@ -1,6 +1,6 @@
 using System;
 
-namespace BetterRCON
+namespace ChimitAnsi
 {
     public class AnsiOutput
     {

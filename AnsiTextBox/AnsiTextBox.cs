@@ -3,14 +3,14 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BetterRCON
+namespace ChimitAnsi
 {
     public class AnsiTextBox : RichTextBox, IAnsiDecoderClient
     {
         public AnsiTextBox() : base()
         {
             vt100 = new AnsiDecoder();
-            screenS = new ScreenStream();
+            screenS = new BetterRCON.ScreenStream();
             screenS.InjectTo = vt100;
             vt100.Encoding = System.Text.Encoding.GetEncoding("ASCII");
             vt100.Subscribe(this);
@@ -333,7 +333,7 @@ namespace BetterRCON
         public bool SuppressColorCodes { get; set; }
 
         private IAnsiDecoder vt100;
-        private ScreenStream screenS;
+        private BetterRCON.ScreenStream screenS;
         private Color? currentBackgroundColor = null;
         private Color? currentForegroundColor = null;
     }

@@ -44,7 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.Output = new BetterRCON.AnsiTextBox();
+            this.Output = new ChimitAnsi.AnsiTextBox();
             this.Tabs.SuspendLayout();
             this.RCON.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -278,7 +278,7 @@
 
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.TabPage RCON;
-        private AnsiTextBox Output;
+        private ChimitAnsi.AnsiTextBox Output;
         private System.Windows.Forms.Button SendBTN;
         private System.Windows.Forms.TextBox CMDInput;
         private System.Windows.Forms.TabPage Settings;
