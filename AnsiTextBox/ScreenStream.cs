@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using libVT100;
 
-namespace BetterRCON
+namespace ChimitAnsi
 {
     class ScreenStream : Stream
     {

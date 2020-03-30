@@ -30,7 +30,6 @@
         {
             this.Tabs = new System.Windows.Forms.TabControl();
             this.RCON = new System.Windows.Forms.TabPage();
-            this.Output = new BetterRCON.AnsiTextBox();
             this.SendBTN = new System.Windows.Forms.Button();
             this.CMDInput = new System.Windows.Forms.TextBox();
             this.Settings = new System.Windows.Forms.TabPage();
@@ -45,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.Output = new ChimitAnsi.AnsiTextBox();
             this.Tabs.SuspendLayout();
             this.RCON.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -76,20 +76,6 @@
             this.RCON.Text = "RCON";
             this.RCON.UseVisualStyleBackColor = true;
             // 
-            // Output
-            // 
-            this.Output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Output.BackColor = System.Drawing.Color.Black;
-            this.Output.ForeColor = System.Drawing.Color.White;
-            this.Output.Location = new System.Drawing.Point(9, 7);
-            this.Output.Name = "Output";
-            this.Output.ReadOnly = true;
-            this.Output.Size = new System.Drawing.Size(837, 364);
-            this.Output.TabIndex = 5;
-            this.Output.Text = "";
-            // 
             // SendBTN
             // 
             this.SendBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -112,6 +98,7 @@
             this.CMDInput.Name = "CMDInput";
             this.CMDInput.Size = new System.Drawing.Size(756, 20);
             this.CMDInput.TabIndex = 3;
+            this.CMDInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CMDInput_KeyDown);
             // 
             // Settings
             // 
@@ -255,6 +242,21 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // Output
+            // 
+            this.Output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Output.BackColor = System.Drawing.Color.Black;
+            this.Output.ForeColor = System.Drawing.Color.White;
+            this.Output.Location = new System.Drawing.Point(9, 7);
+            this.Output.Name = "Output";
+            this.Output.ReadOnly = true;
+            this.Output.Size = new System.Drawing.Size(837, 364);
+            this.Output.SuppressColorCodes = false;
+            this.Output.TabIndex = 5;
+            this.Output.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,6 +266,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "BetterRCON";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Tabs.ResumeLayout(false);
             this.RCON.ResumeLayout(false);
             this.RCON.PerformLayout();
@@ -277,7 +280,7 @@
 
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.TabPage RCON;
-        private AnsiTextBox Output;
+        private ChimitAnsi.AnsiTextBox Output;
         private System.Windows.Forms.Button SendBTN;
         private System.Windows.Forms.TextBox CMDInput;
         private System.Windows.Forms.TabPage Settings;

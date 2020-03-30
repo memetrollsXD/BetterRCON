@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BetterRCON
+namespace ChimitAnsi
 {
     public class AnsiTextBox : RichTextBox, IAnsiDecoderClient
     {
@@ -14,6 +14,7 @@ namespace BetterRCON
             screenS.InjectTo = vt100;
             vt100.Encoding = System.Text.Encoding.GetEncoding("ASCII");
             vt100.Subscribe(this);
+            SuppressColorCodes = false;
         }
 
         protected override void OnCreateControl()
@@ -23,10 +24,29 @@ namespace BetterRCON
             currentBackgroundColor = BackColor;
         }
 
-        public new void AppendText(string str)
+        /// <summary>
+        ///     Displays the giving text in the rich text box
+        /// </summary>
+        /// <remarks>
+        ///     Takes a string parameter with ansi escape sequences
+        /// </remarks>
+        /// <param name="str"></param>
+        public virtual new void AppendText(string str)
         {
-            byte[] bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(str);
+            if (str.Length == 0)
+            {
+                return;
+            }
+            byte[] bytes = new byte[str.Length];
+            for (int i = 0; i < str.Length; ++i)
+            {
+                bytes[i] = (byte)str[i];
+            }
             screenS.Write(bytes, 0, bytes.Length);
+            // set the current caret position to the end
+            SelectionStart = Text.Length;
+            // scroll it automatically
+            ScrollToCaret();
         }
 
         public void SetTab(IAnsiDecoder _sender)
@@ -47,10 +67,13 @@ namespace BetterRCON
             {
                 currentBackgroundColor = BackColor;
             }
-            SelectionStart = TextLength;
-            SelectionLength = 0;
-            SelectionColor = currentForegroundColor.GetValueOrDefault();
-            SelectionBackColor = currentBackgroundColor.GetValueOrDefault();
+            if (!SuppressColorCodes)
+            {
+                SelectionStart = TextLength;
+                SelectionLength = 0;
+                SelectionColor = currentForegroundColor.GetValueOrDefault();
+                SelectionBackColor = currentBackgroundColor.GetValueOrDefault();
+            }
             base.AppendText(new string(_chars));
         }
 
@@ -117,6 +140,8 @@ namespace BetterRCON
                 {
                     /// all attributes off
                     case GraphicRendition.Reset:
+                        currentForegroundColor = ForeColor;
+                        currentBackgroundColor = BackColor;
                         break;
                     /// Intensity: Bold
                     case GraphicRendition.Bold:
@@ -223,44 +248,72 @@ namespace BetterRCON
                         break;
                     /// Set foreground color, high intensity (aixtem)
                     case GraphicRendition.ForegroundBrightBlack:
+                        currentForegroundColor = Color.Black;
                         break;
                     case GraphicRendition.ForegroundBrightRed:
+                        currentForegroundColor = Color.Orange;
                         break;
                     case GraphicRendition.ForegroundBrightGreen:
+                        currentForegroundColor = Color.LightGreen;
                         break;
                     case GraphicRendition.ForegroundBrightYellow:
+                        currentForegroundColor = Color.LightYellow;
                         break;
                     case GraphicRendition.ForegroundBrightBlue:
+                        currentForegroundColor = Color.LightBlue;
                         break;
                     case GraphicRendition.ForegroundBrightMagenta:
+                        currentForegroundColor = Color.Magenta;
                         break;
                     case GraphicRendition.ForegroundBrightCyan:
+                        currentForegroundColor = Color.LightCyan;
                         break;
                     case GraphicRendition.ForegroundBrightWhite:
+                        currentForegroundColor = Color.White;
                         break;
                     case GraphicRendition.ForegroundBrightReset:
+                        // todo
                         break;
                     /// Set background color, high intensity (aixterm)
                     case GraphicRendition.BackgroundBrightBlack:
+                        currentBackgroundColor = Color.Black;
                         break;
                     case GraphicRendition.BackgroundBrightRed:
+                        currentBackgroundColor = Color.Orange;
                         break;
                     case GraphicRendition.BackgroundBrightGreen:
+                        currentBackgroundColor = Color.LightGreen;
                         break;
                     case GraphicRendition.BackgroundBrightYellow:
+                        currentBackgroundColor = Color.LightYellow;
                         break;
                     case GraphicRendition.BackgroundBrightBlue:
+                        currentBackgroundColor = Color.LightBlue;
                         break;
                     case GraphicRendition.BackgroundBrightMagenta:
+                        currentBackgroundColor = Color.Magenta;
                         break;
                     case GraphicRendition.BackgroundBrightCyan:
+                        currentBackgroundColor = Color.LightCyan;
                         break;
                     case GraphicRendition.BackgroundBrightWhite:
+                        currentBackgroundColor = Color.White;
                         break;
                     case GraphicRendition.BackgroundBrightReset:
+                        // todo
                         break;
                 }
             }
+        }
+
+        public static string GetCodes()
+        {
+            string str = "";
+            for (int i = 30; i <= 38; ++i)
+            {
+                str += String.Format("\x1b[{0}m{1}\t\t\x1b[{2}m{3}\n", i, i, i + 60, i + 60);
+            }
+            return str;
         }
 
         public void ModeChanged(IAnsiDecoder _sender, AnsiMode _mode)
@@ -270,6 +323,14 @@ namespace BetterRCON
         public void SetProperty(IAnsiDecoder _sender, PropertyTypes type, string value)
         {
         }
+
+        /// <summary>
+        ///   If set to true, no colors or high lighting will be performed
+        /// </summary>
+        /// <remarks>
+        ///   True if no color high lighting should be performed
+        /// </remarks>
+        public bool SuppressColorCodes { get; set; }
 
         private IAnsiDecoder vt100;
         private ScreenStream screenS;
