@@ -246,9 +246,9 @@ namespace ChimitRCON
                     response.Add(buffer[i]);
                 }
             } while (!PacketComplete(response.ToArray()));
-            string remotemsg = "";
-            RCONMessageType receiveType = RCONMessageType.None;
-            unpack_msg(response.ToArray(), ref receiveType, ref remotemsg);
+            string remotemsg;
+            RCONMessageType receiveType;
+            unpack_msg(response.ToArray(), out receiveType, out remotemsg);
             switch (m_colormode)
             {
                 case RCONColorMode.ANSI:
@@ -321,7 +321,7 @@ namespace ChimitRCON
             return remotemsg;
         }
 
-        private void unpack_msg(byte[] packet, ref RCONMessageType receiveType, ref string remotemsg)
+        private void unpack_msg(byte[] packet, out RCONMessageType receiveType, out string remotemsg)
         {
             int len = LE2INT(packet, 0);
             int id = LE2INT(packet, 4);

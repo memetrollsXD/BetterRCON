@@ -146,18 +146,6 @@ namespace BetterRCON
             Properties.Settings.Default.Save();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            foreach (TabPage p in Tabs.TabPages)
-            {
-                ConsoleTabPage ctp = p as ConsoleTabPage;
-                if (null != ctp)
-                {
-                    ctp.RCONClient.Dispose();
-                }
-            }
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             Tabs.TabPages.Remove(RCON);
