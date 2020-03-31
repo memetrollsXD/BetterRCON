@@ -113,7 +113,7 @@ namespace BetterRCON
 
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
-            ConsoleTabPage tab = ConsoleTabPage.Clone(RCON);
+            ConsoleTabPage tab = ConsoleTabPage.Clone(RCON, IPTextBox.Text);
             Tabs.TabPages.Add(tab);
             Tabs.SelectedIndex = Tabs.TabCount - 1;
             tab.Output.AppendText(AnsiOutput.cls());
