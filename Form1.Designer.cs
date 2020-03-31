@@ -30,6 +30,7 @@
         {
             this.Tabs = new System.Windows.Forms.TabControl();
             this.RCON = new System.Windows.Forms.TabPage();
+            this.Output = new ChimitAnsi.AnsiTextBox();
             this.SendBTN = new System.Windows.Forms.Button();
             this.CMDInput = new System.Windows.Forms.TextBox();
             this.Settings = new System.Windows.Forms.TabPage();
@@ -44,7 +45,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.Output = new ChimitAnsi.AnsiTextBox();
             this.Tabs.SuspendLayout();
             this.RCON.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -62,6 +62,7 @@
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(863, 431);
             this.Tabs.TabIndex = 3;
+            this.Tabs.SelectedIndexChanged += new System.EventHandler(this.Tabs_SelectedIndexChanged);
             // 
             // RCON
             // 
@@ -76,6 +77,21 @@
             this.RCON.Text = "RCON";
             this.RCON.UseVisualStyleBackColor = true;
             // 
+            // Output
+            // 
+            this.Output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Output.BackColor = System.Drawing.Color.Black;
+            this.Output.ForeColor = System.Drawing.Color.White;
+            this.Output.Location = new System.Drawing.Point(9, 7);
+            this.Output.Name = "Output";
+            this.Output.ReadOnly = true;
+            this.Output.Size = new System.Drawing.Size(837, 364);
+            this.Output.SuppressColorCodes = false;
+            this.Output.TabIndex = 5;
+            this.Output.Text = "";
+            // 
             // SendBTN
             // 
             this.SendBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -87,7 +103,6 @@
             this.SendBTN.TabIndex = 4;
             this.SendBTN.Text = "Send";
             this.SendBTN.UseVisualStyleBackColor = true;
-            this.SendBTN.Click += new System.EventHandler(this.SendBTN_Click);
             // 
             // CMDInput
             // 
@@ -98,7 +113,6 @@
             this.CMDInput.Name = "CMDInput";
             this.CMDInput.Size = new System.Drawing.Size(756, 20);
             this.CMDInput.TabIndex = 3;
-            this.CMDInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CMDInput_KeyDown);
             // 
             // Settings
             // 
@@ -241,21 +255,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Output
-            // 
-            this.Output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Output.BackColor = System.Drawing.Color.Black;
-            this.Output.ForeColor = System.Drawing.Color.White;
-            this.Output.Location = new System.Drawing.Point(9, 7);
-            this.Output.Name = "Output";
-            this.Output.ReadOnly = true;
-            this.Output.Size = new System.Drawing.Size(837, 364);
-            this.Output.SuppressColorCodes = false;
-            this.Output.TabIndex = 5;
-            this.Output.Text = "";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,6 +265,7 @@
             this.Name = "Form1";
             this.Text = "BetterRCON";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Tabs.ResumeLayout(false);
             this.RCON.ResumeLayout(false);
             this.RCON.PerformLayout();

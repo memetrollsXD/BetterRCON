@@ -40,7 +40,6 @@ namespace BetterRCON
             IPTextBox.Text = Properties.Settings.Default.IP;
             PortTextBox.Text = Properties.Settings.Default.Port;
             PasswordTextBox.Text = Properties.Settings.Default.Password;
-            Tabs.SelectedIndex = 1;
         }
 
         private void SaveBtn_Click(object sender, EventArgs e) // Saves doesn't send
@@ -87,19 +86,6 @@ namespace BetterRCON
                 PasswordTextBox.Text = data.Password;
             }
         }
-        private void SendBTN_Click(object sender, EventArgs e) // Sends doesn't save
-        {
-
-            string txt = CMDInput.Text;
-            historyStrings.Add(txt);
-            historyPointer = historyStrings.Count;
-            var answer3 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, txt);
-            Output.AppendText(AnsiOutput.Reset()); // reset colors
-            Output.AppendText(txt + "\n");
-            Output.AppendText(answer3);
-            CMDInput.Text = "";
-        }
-
 
         private void PortTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -127,18 +113,20 @@ namespace BetterRCON
 
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
-            Output.AppendText(AnsiOutput.cls());
+            ConsoleTabPage tab = ConsoleTabPage.Clone(RCON);
+            Tabs.TabPages.Add(tab);
+            Tabs.SelectedIndex = Tabs.TabCount - 1;
+            tab.Output.AppendText(AnsiOutput.cls());
             int x = Int32.Parse(PortTextBox.Text);
-            RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text, OtherRCON.RCONColorMode.ANSI);
-            var answer = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "echo RCON Connection Established");
-            var answer2 = RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
+            tab.RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text, OtherRCON.RCONColorMode.ANSI);
+            string answer = tab.RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "echo RCON Connection Established");
+            string answer2 = tab.RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
             if (String.IsNullOrEmpty(answer))
             {
                 Output.AppendText(AnsiOutput.red("Error connecting.") + " Password incorrect?");
             }
-            Output.AppendText(answer);
-            Output.AppendText(answer2);
-            Tabs.SelectedIndex = 0;
+            tab.Output.AppendText(answer);
+            tab.Output.AppendText(answer2);
             Properties.Settings.Default.HasConnected = true;
             Properties.Settings.Default.FirstTime = false;
             Properties.Settings.Default.IP = IPTextBox.Text;
@@ -158,43 +146,31 @@ namespace BetterRCON
             Properties.Settings.Default.Save();
         }
 
-        private void CMDInput_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
+            foreach (TabPage p in Tabs.TabPages)
             {
-                if (historyPointer > 0)
+                ConsoleTabPage ctp = p as ConsoleTabPage;
+                if (null != ctp)
                 {
-                    historyPointer--;
-                    CMDInput.Text = historyStrings[historyPointer];
+                    ctp.RCONClient.Dispose();
                 }
-            }
-            if (e.KeyCode == Keys.Down)
-            {
-                if (historyPointer < historyStrings.Count - 1)
-                {
-                    historyPointer++;
-                    CMDInput.Text = historyStrings[historyPointer];
-                }
-                else
-                {
-                    CMDInput.Text = "";
-                }
-            }
-            if (e.KeyCode == Keys.Enter)
-            {
-                SendBTN.PerformClick();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
             }
         }
 
-        OtherRCON RCONClient = new OtherRCON();
-        int historyPointer = 0;
-        List<string> historyStrings = new List<string>();
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            RCONClient.Dispose();
+            Tabs.TabPages.Remove(RCON);
+            Tabs.SelectedIndex = 0;
+        }
+
+        private void Tabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ConsoleTabPage tab = Tabs.SelectedTab as ConsoleTabPage;
+            if (null != tab)
+            {
+                tab.CMDInput.Focus();
+            }
         }
     }
 

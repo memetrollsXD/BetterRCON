@@ -69,6 +69,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnsiTextBox\AnsiOutput.cs" />
@@ -86,6 +87,10 @@
     <Compile Include="AnsiTextBox\src\InvalidParameterException.cs" />
     <Compile Include="AnsiTextBox\src\TerminalFrameBuffer.cs" />
     <Compile Include="ConnectionData.cs" />
+    <Compile Include="ConsoleTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlFactory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
