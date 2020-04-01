@@ -35,7 +35,7 @@ namespace BetterRCON
 
         public void CMDInput_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && (e.KeyCode == Keys.W || e.KeyCode == Keys.F4))
+            if (e.Control && (e.KeyCode == Keys.W || e.KeyCode == Keys.F4 || e.KeyCode == Keys.D))
             {
                 TabControl tc = Parent as TabControl;
                 if (null != tc)
