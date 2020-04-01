@@ -12,6 +12,15 @@ namespace BetterRCON
     public class ConsoleTabPage : TabPage
     {
 
+        public ConsoleTabPage() : base()
+        {
+            InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+        }
+
         public void SendBTN_Click(object sender, EventArgs e) // Sends doesn't save
         {
             string txt = CMDInput.Text;
@@ -77,7 +86,6 @@ namespace BetterRCON
             }
             return null;
         }
-
         
         public Button SendBTN
         {
@@ -112,8 +120,8 @@ namespace BetterRCON
         {
             ConsoleTabPage tab = (ConsoleTabPage)ControlFactory.CloneCtrl(rCON);
             tab.Text = name + "        ";
-            tab.SendBTN.Click += tab.SendBTN_Click;
-            tab.CMDInput.KeyDown += tab.CMDInput_KeyDown;
+            tab.SendBTN.Click += new System.EventHandler(tab.SendBTN_Click);
+            tab.CMDInput.KeyDown += new KeyEventHandler(tab.CMDInput_KeyDown);
             return tab;
         }
     }
