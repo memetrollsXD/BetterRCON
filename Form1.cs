@@ -117,13 +117,18 @@ namespace BetterRCON
             Tabs.SelectedIndex = Tabs.TabCount - 1;
             tab.Output.AppendText(AnsiOutput.cls());
             int x = Int32.Parse(PortTextBox.Text);
-            tab.RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text, OtherRCON.RCONColorMode.ANSI);
+            if (!tab.RCONClient.setupStream(IPTextBox.Text, x, PasswordTextBox.Text, OtherRCON.RCONColorMode.ANSI))
+            {
+                tab.Output.AppendText(AnsiOutput.red("Error connecting.") + " IP settings incorrect?\n");
+                return;
+            }
             string answer = tab.RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "echo RCON Connection Established");
-            string answer2 = tab.RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
             if (String.IsNullOrEmpty(answer))
             {
-                Output.AppendText(AnsiOutput.red("Error connecting.") + " Password incorrect?");
+                tab.Output.AppendText(AnsiOutput.red("Error connecting.") + " Password incorrect?\n");
+                return;
             }
+            string answer2 = tab.RCONClient.sendMessage(OtherRCON.RCONMessageType.Command, "list");
             tab.Output.AppendText(answer);
             tab.Output.AppendText(answer2);
             Properties.Settings.Default.HasConnected = true;

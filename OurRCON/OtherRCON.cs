@@ -49,7 +49,7 @@ namespace ChimitRCON
             m_colormode = RCONColorMode.AS_IS;
         }
 
-        public void ConnectSocket()
+        public bool ConnectSocket()
         {
             // Data buffer for incoming data.  
             byte[] bytes = new byte[1024];
@@ -64,28 +64,29 @@ namespace ChimitRCON
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, m_port);
 
                 // Create a TCP/IP  socket.  
-                m_sender = new Socket(ipAddress.AddressFamily,
-                    SocketType.Stream, ProtocolType.Tcp);
+                m_sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
                 // Connect the socket to the remote endpoint. Catch any errors.  
                 try
                 {
                     m_sender.Connect(remoteEP);
 
-                    Console.WriteLine("Socket connected to {0}",
-                        m_sender.RemoteEndPoint.ToString());
+                    Console.WriteLine("Socket connected to {0}", m_sender.RemoteEndPoint.ToString());
                 }
                 catch (ArgumentNullException ane)
                 {
                     Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
+                    return false;
                 }
                 catch (SocketException se)
                 {
                     Console.WriteLine("SocketException : {0}", se.ToString());
+                    return false;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                    return false;
                 }
                 m_sender.ReceiveTimeout = 2000;
 
@@ -93,7 +94,9 @@ namespace ChimitRCON
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return false;
             }
+            return true;
         }
 
         protected void SendSocket(byte[] packet)
@@ -155,8 +158,11 @@ namespace ChimitRCON
                 return;
             }
             // Release the socket.  
-            m_sender.Shutdown(SocketShutdown.Both);
-            m_sender.Close();
+            if (m_sender.IsBound)
+            {
+                m_sender.Shutdown(SocketShutdown.Both);
+                m_sender.Close();
+            }
             m_sender.Dispose();
             m_sender = null;
         }
@@ -209,14 +215,18 @@ namespace ChimitRCON
 
         public RCONColorMode m_colormode { get; private set; }
 
-        public void setupStream(string host, int port, string password, RCONColorMode colormode)
+        public bool setupStream(string host, int port, string password, RCONColorMode colormode)
         {
             m_host = host;
             m_port = port;
             m_password = password;
             m_colormode = colormode;
-            ConnectSocket();
+            if (!ConnectSocket())
+            {
+                return false;
+            }
             sendMessage(RCONMessageType.Auth, m_password);
+            return true;
         }
 
         public string m_host { get; private set; }
