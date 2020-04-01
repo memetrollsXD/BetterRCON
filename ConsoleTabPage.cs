@@ -26,6 +26,14 @@ namespace BetterRCON
 
         public void CMDInput_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Control && (e.KeyCode == Keys.W || e.KeyCode == Keys.F4))
+            {
+                TabControl tc = Parent as TabControl;
+                if (null != tc)
+                {
+                    tc.TabPages.Remove(this);
+                }
+            }
             if (e.KeyCode == Keys.Up)
             {
                 if (historyPointer > 0)
