@@ -148,6 +148,7 @@ namespace BetterRCON
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Tabs.DrawMode = TabDrawMode.OwnerDrawFixed;
             Tabs.TabPages.Remove(RCON);
             Tabs.SelectedIndex = 0;
         }
@@ -160,6 +161,48 @@ namespace BetterRCON
                 tab.CMDInput.Focus();
             }
         }
-    }
 
+        private void Tabs_DrawItem(object sender, DrawItemEventArgs e)
+        {    
+            Point _imageLocation = new Point(0, 0);
+            try
+            {
+                TabPage tab = Tabs.TabPages[e.Index];
+                Image img = new Bitmap(Properties.Resources.closebutton);
+                Rectangle r = e.Bounds;
+                r = Tabs.GetTabRect(e.Index);
+                r.Offset(2, 2);
+                Brush TitleBrush = new SolidBrush(Color.Black);
+                Font f = this.Font;
+                string title = tab.Text;
+                if (e.Index >= 1)
+                {
+                    e.Graphics.DrawImage(img, new Point(r.X, r.Y));
+                }
+                else
+                {
+                    r.Offset(-1 * img.Width, 0);
+                }
+                e.Graphics.DrawString(title, f, TitleBrush, new PointF(r.X + img.Width, r.Y));
+            }
+            catch (Exception) { }
+        }
+
+        private void Tabs_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            Rectangle r = Tabs.GetTabRect(Tabs.SelectedIndex);
+            Image img = new Bitmap(Properties.Resources.closebutton);
+            r.Width = img.Width;
+            r.Height = img.Height;
+            if (Tabs.SelectedIndex >= 1)
+            {
+                if (r.Contains(p))
+                {
+                    TabPage TabP = (TabPage)Tabs.TabPages[Tabs.SelectedIndex];
+                    Tabs.TabPages.Remove(TabP);
+                }
+            }
+        }
+    }
 }

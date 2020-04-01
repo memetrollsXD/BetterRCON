@@ -62,7 +62,9 @@
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(863, 431);
             this.Tabs.TabIndex = 3;
+            this.Tabs.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.Tabs_DrawItem);
             this.Tabs.SelectedIndexChanged += new System.EventHandler(this.Tabs_SelectedIndexChanged);
+            this.Tabs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Tabs_MouseClick);
             // 
             // RCON
             // 

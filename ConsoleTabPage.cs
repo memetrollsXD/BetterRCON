@@ -103,7 +103,7 @@ namespace BetterRCON
         public static ConsoleTabPage Clone(TabPage rCON, string name)
         {
             ConsoleTabPage tab = (ConsoleTabPage)ControlFactory.CloneCtrl(rCON);
-            tab.Text = name;
+            tab.Text = name + "        ";
             tab.SendBTN.Click += tab.SendBTN_Click;
             tab.CMDInput.KeyDown += tab.CMDInput_KeyDown;
             return tab;
