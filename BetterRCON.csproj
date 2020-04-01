@@ -132,7 +132,6 @@
   <ItemGroup>
     <Content Include="Console.ico" />
     <None Include="Resources\closebutton.png" />
-    <None Include="Resources\addbutton.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

@@ -22,22 +22,21 @@ namespace BetterRCON
             try
             {
                 TabPage tab = TabPages[e.Index];
-                Image img = new Bitmap(Properties.Resources.closebutton);
-                Rectangle r = e.Bounds;
-                r = GetTabRect(e.Index);
+                Image closeicon = new Bitmap(Properties.Resources.closebutton);
+                Rectangle r = GetTabRect(e.Index);
+                // r will be 
                 r.Offset(2, 2);
                 Brush TitleBrush = new SolidBrush(Color.Black);
-                Font f = this.Font;
+                Font f = tab.Font;
                 string title = tab.Text;
-                if (e.Index >= 1)
+                if (e.Index >= 1) // only on the second or more tab
                 {
-                    e.Graphics.DrawImage(img, new Point(r.X, r.Y));
+                    // we paint the close icon on the tab title here
+                    e.Graphics.DrawImage(closeicon, new Point(r.X + r.Width - closeicon.Width - 5, r.Y));
                 }
-                else
-                {
-                    r.Offset(-1 * img.Width, 0);
-                }
-                e.Graphics.DrawString(title, f, TitleBrush, new PointF(r.X + img.Width, r.Y));
+                // here, we draw the title. Since the control is in OwnerDrawFixed mode, we need to draw it ourselves.
+                // The control doesn't do it automatically anymore.
+                e.Graphics.DrawString(title, f, TitleBrush, new PointF(r.X, r.Y));
             }
             catch (Exception) { }
         }
@@ -47,6 +46,7 @@ namespace BetterRCON
             Point p = e.Location;
             Rectangle r = GetTabRect(SelectedIndex);
             Image img = new Bitmap(Properties.Resources.closebutton);
+            r.X = r.X + r.Width - img.Width - 5;
             r.Width = img.Width;
             r.Height = img.Height;
             if (SelectedIndex >= 1)
