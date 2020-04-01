@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Tabs = new System.Windows.Forms.TabControl();
+            this.Tabs = new CloseTabControl();
             this.RCON = new System.Windows.Forms.TabPage();
             this.Output = new ChimitAnsi.AnsiTextBox();
             this.SendBTN = new System.Windows.Forms.Button();
@@ -62,9 +62,7 @@
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(863, 431);
             this.Tabs.TabIndex = 3;
-            this.Tabs.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.Tabs_DrawItem);
             this.Tabs.SelectedIndexChanged += new System.EventHandler(this.Tabs_SelectedIndexChanged);
-            this.Tabs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Tabs_MouseClick);
             // 
             // RCON
             // 

@@ -86,6 +86,9 @@
     <Compile Include="AnsiTextBox\src\InvalidCommandException.cs" />
     <Compile Include="AnsiTextBox\src\InvalidParameterException.cs" />
     <Compile Include="AnsiTextBox\src\TerminalFrameBuffer.cs" />
+    <Compile Include="CloseTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ConnectionData.cs" />
     <Compile Include="ConsoleTabPage.cs">
       <SubType>Component</SubType>
