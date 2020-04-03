@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
+/* Todo: Document these sources! */
+
 namespace ChimitRCON
 {
 

@@ -3,6 +3,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
+/* Todo: Document these sources! */
+
 namespace ChimitAnsi
 {
     public class AnsiTextBox : RichTextBox, IAnsiDecoderClient
